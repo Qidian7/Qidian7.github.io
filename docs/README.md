@@ -1,4 +1,2 @@
-# Headline
+# Welcome to my Blog! 🎉
 
-> Hahahahaha 
-# Qidian7.github.io
