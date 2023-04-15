@@ -2,7 +2,7 @@
 
 <img src="assert/tx.JPG" alt="tx" style="zoom:25%;" />
 
-# <span style='color:black;font-weight:bold;'>奇点全栈进阶之路🚀</span>
+# <span style='color:black;font-weight:bold;'>奇点的全栈进阶之路🚀</span>
 
 > **只有持续学习才能不被时间打败！**
 
