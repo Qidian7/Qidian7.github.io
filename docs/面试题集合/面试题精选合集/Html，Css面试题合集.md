@@ -29,3 +29,35 @@ HTML5语义化是指使用合理的正确的标签来布局页面【正确的标
 5.利于seo，爬虫会根据不同标签来赋予不同的权重
 ```
 
+------
+
+### - HTML5新特性有哪些
+
+- 语义化的标签：header，footer，nav，article，section……
+- 音视频处理
+- canvas/webgl
+- web存储 localstorage/sessionstorage
+- websocket
+- history API
+- 表单控件 calendar、date、time、email、url、search
+
+------
+
+### - CSS 选择器及优先级
+
+#### 选择器：
+
+- id选择器（#xxx）
+- 类选择器（.xxx）
+- 属性选择器(a[rel="external"])
+- 伪类选择器（:hover）
+- 通配符（*）
+- 标签选择器（div，p，span……）
+- 子选择器（ul>li）
+- 后代选择器（ul,li）
+- 相邻选择器（hi+p）
+
+#### 优先级：
+
+**！important>内联样式>id选择器>类选择器/属性选择器/伪类选择器>标签选择器>通配符选择器**
+
