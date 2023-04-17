@@ -1,0 +1,19 @@
+html,
+body {
+  width: 100%;
+  position: absolute;
+  left: auto;
+  top: 0px;
+  min-width: 1300px;
+  overflow: auto;
+  margin: 0 auto;
+}
+#app {
+  width: 1200px;
+}
+/* body {
+  margin: 0 auto;
+}
+main {
+  width: 1200px;
+} */
