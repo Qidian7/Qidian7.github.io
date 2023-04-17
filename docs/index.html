@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Document</title>
+    <title>全栈进阶之路🚀</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="description" content="Description" />
     <meta
@@ -13,6 +13,31 @@
       rel="stylesheet"
       href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
     />
+    <!-- 右侧目录 -->
+    <!-- docsify-plugin-toc -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/light.css"
+    />
+    <!-- logo -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assert/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assert/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assert/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="assert/favicon_io/site.webmanifest" />
   </head>
   <style>
     nav a {
@@ -68,6 +93,19 @@
           height: 40,
           offset: 500,
         },
+        toc: {
+          tocMaxLevel: 5,
+          target: "h2, h3",
+          ignoreHeaders: [
+            "<!-- {docsify-ignore} -->",
+            "<!-- {docsify-ignore-all} -->",
+          ],
+        },
+        timeUpdater: {
+          text: ">last update time: {docsify-updated}",
+          formatUpdated: "{YYYY}/{MM}/{DD}",
+          whereToPlace: "bottom", // "top" or "bottom", default to "bottom"
+        },
       };
     </script>
     <!-- Docsify v4 -->
@@ -88,6 +126,10 @@
     <script src="//unpkg.com/docsify-footer-enh/dist/docsify-footer-enh.min.js"></script>
     <!-- 返回顶部 -->
     <script src="//unpkg.com/@zhg-x/docsify-plugins@1.0.2/src/scroll-to-top.js"></script>
+    <!--右侧目录-->
+    <script src="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
+    <!--更新时间-->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-updated/src/time-updater.min.js"></script>
     <!-- GitTalk评论 -->
     <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
