@@ -2,7 +2,7 @@
 
 <img src="assert/tx.JPG" alt="tx" style="zoom:25%;" />
 
-# <span style='color:black;font-weight:bold;'>全栈修炼日记🧘🏻</span>
+# <span style='color:black;font-weight:bold;'>全栈修炼宝典🧘🏻</span>
 
 > **只有持续学习才能不被时间打败！**
 
