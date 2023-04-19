@@ -401,6 +401,6 @@ function updateWorkInProgressHook(): Hook {
 
 调用 `dispatch` 触发 action，发起更新任务调度，同时在 `dispatchAction` 里计算最新的 state，并更新 `queue` 环形链表，然后执行 `scheduleUpdateOnFiber`，进入调度，再次进入到 `renderWithHooks`，执行 `updateState` (实际上执行的是 `updateReducer`) ，得到新的 `state` 值返回，并重新计算渲染。流程图如下图所示：
 
-<img src="asserts/useState流程图.jpg" alt="useState流程图" style="zoom:50%;" />
+![useState流程图](asserts/useState流程图.jpg)
 
 至此useState源码解析结束🔚！
