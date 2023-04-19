@@ -21,7 +21,7 @@
 
 >  **mount时分别调用了mountCallback/mountMemo**
 
-```typescript
+```js
 const HooksDispatcherOnMount: Dispatcher = {
   useCallback: mountCallback,
   useMemo: mountMemo,
@@ -31,7 +31,7 @@ const HooksDispatcherOnMount: Dispatcher = {
 
 #### 3.1.1 mountMemo
 
-```typescript
+```js
 //! mount
 function mountMemo<T>(
   nextCreate: () => T,
@@ -49,7 +49,7 @@ function mountMemo<T>(
 
 ##### 3.1.1.1 mountWorkInProgressHook
 
-```typescript
+```js
 //1 创建一个新的hook对象并添加到hook链表中，返回当前的workInProgressHook
 function mountWorkInProgressHook(): Hook {
   //1 创建一个hook对象
@@ -77,7 +77,7 @@ function mountWorkInProgressHook(): Hook {
 
 #### 3.1.2  mountCallback
 
-```typescript
+```js
 function mountCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
     //1 创建一个新的hook对象并添加到hook链表中，返回当前的workInProgressHook
     const hook = mountWorkInProgressHook();
@@ -94,7 +94,7 @@ function mountCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
 
 > Updata时分别调用了UpdataMemo/UpdataCallback
 
-```typescript
+```js
 const HooksDispatcherOnMount: Dispatcher = {
   useCallback: UpdataCallback,
   useMemo: UpdataMemo,
@@ -104,7 +104,7 @@ const HooksDispatcherOnMount: Dispatcher = {
 
 #### 3.2.1  UpdataMemo
 
-```typescript
+```js
 //! update
 function updateMemo<T>(
   nextCreate: () => T,
@@ -130,7 +130,7 @@ function updateMemo<T>(
 
 #### 3.2.2  UpdataCallback
 
-```typescript
+```js
 function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
     const hook = updateWorkInProgressHook();
     const nextDeps = deps === undefined ? null : deps;

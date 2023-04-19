@@ -26,7 +26,7 @@
 
 > 每一个hook方法都会生成一个特定类型的hook对象，用以存储信息，众多hooks对象会连接形成链表，挂载到fiber的memoizedState字段上
 
-```typescript
+```js
 export type Hook = {
   //1   上一次渲染用的state，不同的hook中memoizedState的含义不同
   //1   如在useState中：const[count,useCount] = useState(0)，memoizedState保存的就是state的值
@@ -40,14 +40,14 @@ export type Hook = {
 
 比如我们调用两个useState
 
-```typescript
+```js
 const[count,useCount] = useState(0) ;
 const[num,useNum] = useState(1)
 ```
 
 那么其hook链表的数据结构如下所示：
 
-```typescript
+```js
 {
   memoizedState: 0,
   baseState: 0,
@@ -72,7 +72,7 @@ const[num,useNum] = useState(1)
 
 Update 和 UpdateQueue 是存储 `useState` 的 state 及 `useReducer` 的 reducer 相关内容的数据结构。
 
-```typescript
+```js
 // packages/react-reconciler/src/ReactFiberHooks.old.js
 
 type Update<S, A> = {|
@@ -109,7 +109,7 @@ type UpdateQueue<S, A> = {|
 
 Effect 结构是和 `useEffect` 等 effect hooks 相关的，先看一下它的结构：
 
-```typescript
+```js
 // packages/react-reconciler/src/ReactFiberHooks.old.js
 
 export type Effect = {|
@@ -123,7 +123,7 @@ export type Effect = {|
 
 当我们的函数组件中使用了如下的 `useEffect` 时：
 
-```typescript
+```js
 useEffect(() => {
   console.log('create');
   return () => {
@@ -134,7 +134,7 @@ useEffect(() => {
 
 对应的 Hook 如下：
 
-```typescript
+```js
 {
   memoizedState: {
     create: () => { console.log('create') },
@@ -155,7 +155,7 @@ useEffect(() => {
 
 在`react-main/packages/react/src/ReactHooks`中暴露了所有的hooks函数
 
-```typescript
+```js
 // 截取部分
 export function useState<S>(
   initialState: (() => S) | S
@@ -176,7 +176,7 @@ export function useReducer<S, I, A>(
 
 观察每个 `hook` 函数，不难发现每个 `hook` 函数都调用了 `resolveDispatcher()` 函数，这个函数返回的是 `ReactCurrentDispatcher.current` ，全局搜索可以发现在 `renderWithHooks` 中会对其进行操作
 
-```typescript
+```js
 // react-main/packages/react-reconciler/ReactFiberHooks.js
 export function renderWithHooks<Props, SecondArg>(
   current: Fiber | null,
@@ -247,7 +247,7 @@ export function renderWithHooks<Props, SecondArg>(
 
 #### 2.4.1 四种状态的hooks对象：
 
-```typescript
+```js
 // 函数组件初始化用的 hooks
 const HooksDispatcherOnMount = { 
     useState: mountState,
@@ -282,7 +282,7 @@ const ContextOnlyDispatcher = {
 
 若current为空，则说明是**首次加载**，`ReactCurrentDispatcher.current` 将被赋值成 `mountState`
 
-```typescript
+```js
 // packages/react-reconciler/src/ReactFiberHooks.new.js
 const HooksDispatcherOnMount: Dispatcher = {
   // ...
@@ -293,7 +293,7 @@ const HooksDispatcherOnMount: Dispatcher = {
 
 若current不为空，说明是在组件**更新阶段**，`ReactCurrentDispatcher.current` 将被赋值成 `updateState`
 
-```typescript
+```js
 // packages/react-reconciler/src/ReactFiberHooks.new.js
 
 const HooksDispatcherOnUpdate: Dispatcher = {
@@ -307,6 +307,10 @@ const HooksDispatcherOnUpdate: Dispatcher = {
 
 <img src="asserts/hook函数调用流程.png" alt="hook函数调用流程" style="zoom:50%;" />
 
-## 3.尾记
+## 3.总结
 
 本文介绍了hook的背景，三种强相关的数据结构以及hook函数调用的整个过程，最后通过一个示例具体说明。不难发现：**当我们调用某个 `hook` 时，实际上调用的是挂载在 `ReactCurrentDispatcher.current` 属性上的对应的 hook 处理函数，一共四种形态每种形态都对应着不同的 dispatch 方法**
+
+## 4.尾记
+
+下面将开启React-Hooks系列的源码讲究，默认对各个hook都有了基本的了解！

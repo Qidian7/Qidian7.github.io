@@ -8,7 +8,7 @@
 
 **在 `mount` 阶段**，执行的 `useState` 方法，就相当于 `HooksDispatcherOnMount` 里的 `mountState`
 
-```typescript
+```js
 const HooksDispatcherOnMount: Dispatcher = {
   useState: mountState,
 };
@@ -16,7 +16,7 @@ const HooksDispatcherOnMount: Dispatcher = {
 
 在 **`update` 阶段**，执行的 `useState` 方法，就相当于是 `HooksDispatcherOnUpdate` 里的 `updateState`
 
-```typescript
+```js
 const HooksDispatcherOnUpdate: Dispatcher = {
   useState: updateState,
 };
@@ -26,7 +26,7 @@ const HooksDispatcherOnUpdate: Dispatcher = {
 
 ### 2.1 mount阶段
 
-```typescript
+```js
 function mountState<S>(
   initialState: (() => S) | S
 ): [S, Dispatch<BasicStateAction<S>>] {
@@ -73,7 +73,7 @@ React 有一个专门的函数来生成 hook ，名为 `mountWorkInProgressHook`
 
 #### 2.1.1 mountWorkInProgressHook 方法
 
-```typescript
+```js
 // 创建新的 hook 对象，返回当前的 workInProgressHook
 function mountWorkInProgressHook(): Hook {
   const hook: Hook = {
@@ -107,7 +107,7 @@ function mountWorkInProgressHook(): Hook {
 
 在 `mountState` 中，通过 `dispatchSetState` 创建一个 `dispatch` 触发器，来更新 state，在创建 `dispatch` 触发器的时候，绑定了当前的 Fiber 节点，和新的 queue 队列
 
-```typescript
+```js
 function dispatchSetState<S, A>(
   fiber: Fiber,
   queue: UpdateQueue<S, A>,
@@ -173,7 +173,7 @@ function dispatchSetState<S, A>(
 
 也就是在 `render` 的时候触发的更新，可以理解为：当前更新周期中又产生了新的更新
 
-```typescript
+```js
 function isRenderPhaseUpdate(fiber: Fiber) {
   const alternate = fiber.alternate;
   return (
@@ -185,7 +185,7 @@ function isRenderPhaseUpdate(fiber: Fiber) {
 
 如果是这种 re-render 的情况的话，那么会执行 `enqueueRenderPhaseUpdate` 方法，
 
-```typescript
+```js
 function enqueueRenderPhaseUpdate<S, A>(
   queue: UpdateQueue<S, A>,
   update: Update<S, A>,
@@ -225,14 +225,14 @@ queue 是一个环形链表
 
 在[React-Hooks实现原理中](React全家桶/React源码解读/React-Hooks实现原理.md)我们知道，在 `renderWithHooks` 中会判断是 `update` 还是 `mount` 阶段，赋予不同的 Hooks 对象 这里我们是 `update` 阶段，会调用 `HooksDispatcherOnUpdate` 里的 `useState`，也就是 `updateState`
 
-```typescript
+```js
 const HooksDispatcherOnUpdate: Dispatcher = {
   useState: updateState,
   ...
 };
 ```
 
-```typescript
+```js
 function updateState<S>(
   initialState: (() => S) | S,
 ): [S, Dispatch<BasicStateAction<S>>] {
@@ -249,7 +249,7 @@ function updateState<S>(
 - 如果 `action` 是一个 `Function` 那就返回 `Function` 的执行结果
 - 否则就直接返回 `action` 的值
 
-```typescript
+```js
 function basicStateReducer<S>(state: S, action: BasicStateAction<S>): S {
   // $FlowFixMe: Flow doesn't like mixed types
   return typeof action === 'function' ? action(state) : action;
@@ -260,7 +260,7 @@ function basicStateReducer<S>(state: S, action: BasicStateAction<S>): S {
 
 > 由于太太太太长了，只保留了关键部分😷
 
-```typescript
+```js
 function updateReducer<S, I, A>(
   reducer: (S, A) => S,
   initialArg: I,
@@ -339,7 +339,7 @@ function updateReducer<S, I, A>(
 
 **updateWorkInProgressHook**
 
-```typescript
+```js
 function updateWorkInProgressHook(): Hook {
   // 获取当前 hook 的下一个 hook
   let nextCurrentHook: null | Hook;
