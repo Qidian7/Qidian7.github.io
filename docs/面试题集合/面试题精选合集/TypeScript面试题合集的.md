@@ -40,3 +40,42 @@ TypeScript 引入了很多面向对象程序设计的特征，包括：
 ### - TypeScript 和 JavaScript 哪个更好？
 
 由于 TS 的先天优势，TS 越来越受欢迎。但是TS 最终不可能取代 JS，因为 JS 是 TS 的核心。选择 TypeScript 还是 JavaScript 要由开发者自己去做决定。如果你喜欢类型安全的语言，那么推荐你选择 TS。 如果你已经用 JS 好久了，你可以选择走出舒适区学习 TS，也可以选择坚持自己的强项，继续使用 JS。
+
+------
+
+### - 什么是泛型
+
+泛型是指在定义函数、接口或类的时候，不预先指定具体的类型，使用时再去指定类型的一种特性。
+可以把泛型理解为代表类型的参数
+
+```typescript
+// 需求：定义一个函数，传入两个参数，第一个是数据，第二个是数量
+// 作用：根据数量产生对应个数的数据，存放在一个数组中
+// (123,3)===> (123,123,123)
+
+//1 case1 value是数值
+function getArr(value: number, count: number): Array<number> {
+  const arr: Array<number> = [];
+  for (let i = 0; i < count; i++) {
+    arr.push(value);
+  }
+  return arr;
+}
+console.log(getArr(666, 4)); //[ 666, 666, 666, 666 ]
+```
+
+**但这样就把value的type定死了，但是原则上不推荐使用any，因此使用泛型：**
+
+```typescript
+function getArr<T>(value: T, count: number): Array<T> {
+  const arr: Array<T> = [];
+  for (let i = 0; i < count; i++) {
+    arr.push(value);
+  }
+  return arr;
+}
+console.log(getArr(666, 4)); //[ 666, 666, 666, 666 ]
+```
+
+上例中，我们在函数名后添加了 `<T>`，其中 `T` 用来指代任意输入的类型，在后面的输入 `value: T` 和输出 `Array<T>` 中即可使用了。
+

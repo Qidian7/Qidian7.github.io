@@ -163,8 +163,17 @@ Renderer 会根据 Reconciler 中为虚拟 DOM 打的 tag，在 commit 阶段**�
 
 以上就是 React 的设计理念以及新老架构的演变
 
+------
+
 ## 总结
 
 通过本节我们知道了`React16`采用新的`Reconciler`。`Reconciler`内部采用了`Fiber`的架构。
 
-`Fiber`是什么？他和`Reconciler`或者说和`React`之间是什么关系？我们会在接下来三节解答。
+`Fiber`是什么？他和`Reconciler`或者说和`React`之间是什么关系？我们会在下一节解答。
+
+------
+
+## 参考资料
+
+- [React技术揭秘Fiber架构的实现原理](https://react.iamkasong.com/process/fiber.html#fiber%E7%9A%84%E8%B5%B7%E6%BA%90)
+
