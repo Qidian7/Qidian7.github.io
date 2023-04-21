@@ -14,8 +14,8 @@
 ------
 
 - **Render阶段**
-- [Render阶段之Beginwork](React全家桶/React源码解读/Render之Beginwork.md)
-- [Render阶段之Completework](React全家桶/React源码解读/Render之Completework.md)
+- [Render阶段之Beginwork](React全家桶/React源码解读/Render阶段/Render之Beginwork.md)
+- [Render阶段之Completework](React全家桶/React源码解读/Render阶段/Render之Completework.md)
 
 ------
 
