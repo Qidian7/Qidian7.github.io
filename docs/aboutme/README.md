@@ -12,19 +12,19 @@
 
 <span style='font-weight:bold;font-size:27px'>关于我🎈</span>
 
-
+｜
 
 - <span style='font-weight:bold;font-size:20px'>**🏫 本硕就读于某不知名双一流高校，本科电子信息工程，玩了两年机器人打了一届机甲大师获得不错的成绩，研究生方向是工业界中基于深度学习的异常检测和故障诊断。**</span>
 
-
+｜
 
 - <span style='font-weight:bold;font-size:20px'>**📒 喜欢前端，立志于做一个优秀的全栈开发者**</span>
 
-
+｜
 
 - <span style='font-weight:bold;font-size:20px'>**❤️ 喜欢使用JavaScript/TypeScript以及React框架进行开发，目前前后端双修，能用Python做点深度学习。**</span>
 
-
+｜
 
 - <span style='font-weight:bold;font-size:20px'>**🌅 一直坚信“只有持续学习才能打败时间”，让我们变得更强！🚀**</span>
 
