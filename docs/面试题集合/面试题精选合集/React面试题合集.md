@@ -96,3 +96,12 @@
 
 > React18提出并发的概念，实现协调可中断，极大的提升用户的体验，用于区分紧急和非紧急更新。
 
+------
+
+### React生命周期
+
+![react生命周期(新)](assert/react生命周期(新).png)
+
+相比于旧的生命周期钩子，新钩子废弃了3个分别是：componentWillMount，componentWillReceiveProps和componentWillUpdate
+
+新增了两个生命周期钩子：getDerivedStateFromProps和getSnapshotBeforeUpdate
