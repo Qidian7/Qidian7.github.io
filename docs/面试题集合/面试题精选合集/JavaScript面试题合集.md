@@ -80,7 +80,7 @@ console.log(toString.call(null)); //[object Null]
 
 ------
 
-### - 作用域和作用域链
+### ⭐️- 作用域和作用域链
 
 **作用域：**规定变量和函数可作用的范围。
 
@@ -88,7 +88,7 @@ console.log(toString.call(null)); //[object Null]
 
 ------
 
-### - 闭包？常见的闭包有哪些？引起内存泄露？
+### ⭐️- 闭包？常见的闭包有哪些？引起内存泄露？
 
 #### **闭包：**
 
@@ -115,3 +115,23 @@ console.log(toString.call(null)); //[object Null]
 **核心：函数里面返回函数，做到参数复用**
 
 场景：（1）参数复用（2）延时执行（3）提前确认
+
+------
+
+### ⭐️- 讲一讲promise
+
+- promise是一种异步编程解决方案，解决了传统的解决方案回调函数中的**回调地狱**的问题，并且更加灵活易懂
+- promise实例具有三种状态：pending，fufilled，rejected三种状态
+  - 但是变化途径只有两种：pending---fufilled 或 pending --- rejected，状态一旦变化就凝固了。
+- new promise（）接收一个函数，入参为resolve和reject
+  - resolve（）进入 . then也就是执行成功的回调 ； reject（）进入 . catch失败的回调手动的捕获异常
+
+- Promise对象方法有：
+  - Promise.resolve：将现有对象转化为promise对象
+  - Promise.reject：返回一个promise实例，该实例状态为rejected
+  - ⭐️【手写题】Promise.all：将多个promise实例包装成1个新的promise实例
+    - 其状态由all里面的promise实例决定，都为fulfilled才会变成fulfilled；只要有一个rejected，其状态就会变成rejected，并且返回第一个被rejected实例的返回值
+
+#### 延伸问题：async/await
+
+promise搭配async/await可以讲promise链式调用变为类似同步代码的形式。async/await必须在函数中使用，在函数钱加上async，await关键字后面是一个promise对象，并且返回该对象的值，看起来代码结构更加清晰。
