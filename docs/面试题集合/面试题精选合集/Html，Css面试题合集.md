@@ -375,3 +375,18 @@ position:absolute / fixed
 }
 ```
 
+------
+
+### 【小鹅通】visibility:hidden和display:none的区别
+
+```markdown
+/*
+	1.定义不同：
+		visibility是判断元素是否可见，
+		display用于定义建立布局时元素生成的显示框类型。
+	2.作用不同：
+		display:none将元素显示为无，不占网页中的任何位置
+		visibility:hidden将元素隐藏，占用位置
+*/
+```
+
