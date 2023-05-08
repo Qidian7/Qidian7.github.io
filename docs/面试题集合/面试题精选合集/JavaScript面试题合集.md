@@ -135,3 +135,18 @@ console.log(toString.call(null)); //[object Null]
 #### 延伸问题：async/await
 
 promise搭配async/await可以讲promise链式调用变为类似同步代码的形式。async/await必须在函数中使用，在函数钱加上async，await关键字后面是一个promise对象，并且返回该对象的值，看起来代码结构更加清晰。
+
+------
+
+### - == 和 ===区别是什么？
+
+- ==是基于类型转换的相等，也就是先类型转换在比较
+
+```js
+null == undefined // true
+1 == '1' //true
+true == 1 // true
+true == '1' //true
+```
+
+- ===是严格相等，不做任何的类型转换

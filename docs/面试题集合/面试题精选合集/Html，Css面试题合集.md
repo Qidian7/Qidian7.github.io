@@ -94,7 +94,7 @@ HTML5语义化是指使用合理的正确的标签来布局页面【正确的标
 
 ------
 
-### ⭐️- 什么是响应式设计？响应式设计的基本原理是什么？如何进行实现？
+### ⭐️【美团】什么是响应式设计？响应式设计的基本原理是什么？如何进行实现？
 
 - 是一种网络页面设计布局，设计一个网站兼容不同的终端。
 - 通过**媒体查询@media**，检测视口的分辨率，查询针对不同宽度的设备然后进行布局和样式的设置，来展现不同的布局和内容，从而适配不同设备的目的。
@@ -115,7 +115,7 @@ HTML5语义化是指使用合理的正确的标签来布局页面【正确的标
 
 ------
 
-### ⭐️-行级元素和块级元素
+### ⭐️【美团】行级元素和块级元素
 
 行级元素：span,a,i,b,label
 
@@ -147,7 +147,7 @@ sass/less的优点：
 
 #### 概念：
 
-**块级格式化上下文**，是一个完全独立的空间（布局环境），让空间里的子元素不会影响到外面的布局。听过一句很精辟的话：**bfc是css的块级作用域**
+**块级格式化上下文**，是一个完全独立的空间（布局环境），让**空间里的子元素不会影响到外面的布局**。听过一句很精辟的话：**bfc是css的块级作用域**
 
 #### 怎么触发：
 
@@ -159,7 +159,7 @@ position:absolute / fixed
 
 #### 应用：
 
-- 防止margin重叠
+- 防止margin重叠【水平居中可能会用到】
 - 清除内部浮动
 - 自适应两栏布局
 - 自适应两栏布局
@@ -179,3 +179,199 @@ position:absolute / fixed
 （1）用图片来代替边框或细线，但增加了页面加载开销
 
 （2）使用transform中的scale进行缩放，缩放 0.5像素大小的边框
+
+------
+
+### ⭐️【阅文】垂直居中/水平居中的方法
+
+> **一个元素要想实现垂直/水平居中，必须要有一个参照物，这个参照物要么是父级div元素，要么就是body元素。**
+
+```html
+<body>
+    <div class="box1">
+        <div class="box2"></div>
+    </div>
+</body>
+```
+
+#### 1.垂直居中
+
+<img src="assert/box.png" style="zoom:33%;" />
+
+
+
+```css
+/* flex + justify-content(主轴) + align-items（侧轴） */
+.box1{
+    width: 400px;
+    height: 400px;
+    border: 2px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+}
+```
+
+```css
+/* position + transform:translate(-50%,-50%)*/
+.box1 {
+    width: 400px;
+    height: 400px;
+    border: 2px solid red;
+    position: relative;
+}
+.box2 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left:50%;
+    transform:translate(-50px,-50px);
+    background-color: aqua;    
+} 
+```
+
+```css
+/* position + margin -盒子宽高 */
+.box1 {
+    width: 400px;
+    height: 400px;
+    border: 2px solid red;
+    position: relative;
+}
+.box2 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left:50%;
+    margin: -50px 0 0 -50px;
+    background-color: aqua;    
+}
+```
+
+```css
+/* position + margin:auto */
+.box1 {
+    width: 400px;
+    height: 400px;
+    border: 2px solid red;
+    position: relative;
+}
+.box2 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: aqua;    
+}
+```
+
+```css
+/* 文本的时候，设置子元素line-height等于父元素的height */
+```
+
+
+
+#### 2.水平居中
+
+```css
+1. margin auto
+2. positon + left + margin-left回退 
+3. positon + left + transform:translateX(-50%)
+4. flex + justify-content：center
+5. 文本：text-align:center
+```
+
+##### 2.1 一个注意点
+
+使用方法1如果使小盒子上下也有一个边距，可以使用`margin：xxx ，auto`但会造成两个盒子一起往下窜，如下图
+
+<img src="assert/margin塌陷1.png" alt="margin塌陷1" style="zoom:33%;" />
+
+这种情况的出现是由 **margin塌陷** 导致的，可以将父元素box变为BFC：`overflow: hidden;` （注意**不是**超出隐藏的作用）
+
+<img src="assert/margin塌陷2.png" alt="margin塌陷2" style="zoom:33%;" />
+
+```css
+.box1{
+  overflow: hidden;
+	width: 500px;
+	height: 300px;
+	background-color: aquamarine;
+}
+.box2{
+	width: 200px;
+	height: 100px;
+    margin: 50px auto;
+	background-color: lightpink;
+}
+```
+
+### ⭐️【阅文】两栏布局的实现方式
+
+```css
+/* flex */
+/* 父容器：flex，左容器正常写，右容器flex；1 */
+.box{
+    display: flex;
+    height: 500px;
+}
+.box1{
+    width: 200px;
+    background-color: aqua;
+}
+.box2{
+    flex: 1;
+    background-color: blueviolet;
+}
+
+/* float + bfc */
+/* 父容器正常写，左容器float固定大小，右容器bfc，就不会重叠了*/
+.box{
+    width: 700px;
+    height:700px;
+}
+.box1{
+    float: left;
+    width: 200px;
+    height: 500px;
+    background-color: aqua;
+}
+.box2{
+    height: 500px;
+    overflow: auto;
+    background-color: blueviolet;
+}
+```
+
+**flex：1 自动填满剩下空间，一般用于自适应布局**
+
+### ⭐️ 三栏布局【左右固定大小，中间自适应】的实现方式
+
+```css
+/* 父容器：flex，左右固定大小，中间flex:1，注意中间的盒子一定要放在中间 */
+.main{
+    display: flex;
+    height: 400px;
+    border: 1px solid red;
+}
+.left,.right{
+    width: 200px;
+    background-color: black;
+}
+.middle{
+    flex: 1;
+    background-color: aqua;
+}
+```
+
