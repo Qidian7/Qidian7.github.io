@@ -196,9 +196,7 @@ position:absolute / fixed
 
 #### 1.垂直居中
 
-<img src="assert/box.png" style="zoom:33%;" />
-
-
+![box](assert/box.png)
 
 ```css
 /* flex + justify-content(主轴) + align-items（侧轴） */
@@ -296,11 +294,9 @@ position:absolute / fixed
 
 使用方法1如果使小盒子上下也有一个边距，可以使用`margin：xxx ，auto`但会造成两个盒子一起往下窜，如下图
 
-<img src="assert/margin塌陷1.png" alt="margin塌陷1" style="zoom:33%;" />
+![margin塌陷1](assert/margin塌陷1.png)这种情况的出现是由 **margin塌陷** 导致的，可以将父元素box变为BFC：`overflow: hidden;` （注意**不是**超出隐藏的作用)
 
-这种情况的出现是由 **margin塌陷** 导致的，可以将父元素box变为BFC：`overflow: hidden;` （注意**不是**超出隐藏的作用）
-
-<img src="assert/margin塌陷2.png" alt="margin塌陷2" style="zoom:33%;" />
+![margin塌陷2](assert/margin塌陷2.png)
 
 ```css
 .box1{
