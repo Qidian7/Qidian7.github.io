@@ -60,7 +60,7 @@ console.log({} instanceof Object);                   // true
 
 **缺点：Number，Boolean，String基本数据类型不能判断**
 
-#### 3. Object.prototype.toString
+#### 3. Object.prototype.toString.call()
 
 ```js
 var toString = Object.prototype.toString;
@@ -77,6 +77,14 @@ console.log(toString.call(null)); //[object Null]
 优点：精准判断数据类型
 
 缺点：写法繁琐不容易记，推荐进行封装后使用
+
+##### ⭐️  为什么要用call？
+
+两点：
+
+（1）改变this指向，指向我们判断的目标变量，因此用apply也是可以的
+
+（2）因为每个数据的原始toString方法都将被改写，通过call，让该数据调用object上的toString方法，用以判断当前数据类型
 
 ------
 
