@@ -60,7 +60,20 @@ console.log({} instanceof Object);                   // true
 
 **缺点：Number，Boolean，String基本数据类型不能判断**
 
-#### 3. Object.prototype.toString.call()
+### 3. constructor
+
+```js
+let a = 1
+let b = 'abc'
+let c = true
+console.log(a.constructor === Number) // true
+console.log(b.constructor === String) // true
+console.log(c.constructor === Boolean) // true
+```
+
+优点：相比于instanceof可以检测基本数据类型
+
+#### 4. Object.prototype.toString.call()
 
 ```js
 var toString = Object.prototype.toString;
@@ -84,11 +97,11 @@ console.log(toString.call(null)); //[object Null]
 
 （1）改变this指向，指向我们判断的目标变量，因此用apply也是可以的
 
-（2）因为每个数据的原始toString方法都将被改写，通过call，让该数据调用object上的toString方法，用以判断当前数据类型
+（2）因为每个数据的原始toString方法都将被改写，通过call，让该数据调用object上的toString方法，用以判断当前数据类型。
 
 ------
 
-### ⭐️作用域和作用域链
+### ⭐️ 作用域和作用域链
 
 **作用域：**规定变量和函数可作用的范围。
 
@@ -167,3 +180,11 @@ true == '1' //true
 1.  `设置原型`，将对象的原型设置为函数的`prototype`对象。
 1.  让函数的`this`指向这个对象，执行构造函数的代码（为这个新对象添加属性）
 1.  判断函数的返回值类型，如果是值类型，返回创建的对象。如果是引用类型，就返回这个引用类型的对象。
+
+------
+
+### ⭐️【腾讯】怎么判断质数？
+
+1. 判断是否为number类型，是否是整数，是否小于2，满足其一返回false
+2. === 2时，返回true
+3. 对n开算数平方根，此时算数平方根处于3-9，for循环遍历，如果n%i==0返回false，都不是就返回true
