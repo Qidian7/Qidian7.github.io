@@ -257,12 +257,32 @@ export default {
 
 ------
 
-### Vue 模板是如何编译的？经历了哪些过程？
+### 【腾讯】Vue内部运行机制
+
+1. new vue（）初始化和数据劫持：调用vue原型上的_init()进行初始化会初始化vue的生命周期、props、methods、computed和watch；并使用object.defineproperty对data对象里面的属性设置setter和getter函数，完成数据劫持
+2. 调用$mount挂载组件
+3. 编译（compiler）：parse（解析），optimize（标记静态节点做优化），generate（转成字符串）【具体见下题】
+4. 响应式：利用object.defineproperty设置data返回的对象属性，当【读】取数据时，会触发getter函数，把data的属性进行依赖收集，依赖收集目的是将这些属性放到watcher观察队列中，当【写】data的属性时，会触发setter函数，setter告诉watcher数据变化，需要重新渲染试图，watcher调用update来更新视图。
+5. 虚拟dom：在编译过程中有一个generate过程，会将AST生成render function，在此过程时，render function会变成虚拟dom。
+6. 更新视图：在update时，会执行patch，将新旧VNode传进去，通过diff算法进行比较，局部更新，做到最优化。
+
+![vue内部流程](assert/vue内部流程.png)
+
+------
+
+### 【腾讯】Vue 模板是如何编译的？经历了哪些过程？
 
 **Vue 模板编译是指将 Vue 模板字符串转换为可执行的渲染函数的过程。**
 
 Vue 模板编译的过程主要分为以下三个步骤：
 
-1. 解析模板：Vue 会使用正则表达式解析模板字符串，解析出其中的指令、标签、属性等内容。
-2. 生成 AST（抽象语法树）：将解析后的模板字符串转化为抽象语法树，抽象语法树是一个以 JavaScript 对象表示的树形结构，它将模板中的各个节点和属性用 JavaScript 对象的形式表示出来，方便后续对模板进行分析和处理。
-3. 生成渲染函数：将 AST 转化为渲染函数，渲染函数是一个纯 JavaScript 函数，用于将模板转化为 Virtual DOM。
+1. parse解析：Vue 会使用正则表达式解析模板字符串，解析出其中的指令、标签、属性等内容。生成AST（抽象语法树）
+
+   ​	生成 AST（抽象语法树）：将解析后的模板字符串转化为抽象语法树，抽象语法树是一个以 JavaScript 对象表示的树形结构，它将模板中的各个节点和属性用 JavaScript 对象的形式表示出来，方便后续对模板进行分析和处理。
+
+2. optimize（标记静态节点做优化）：vue编译中的一处优化，标记静态节点，当update时，会有一个patch的过程，diff算法会跳过静态节点。
+
+3. generate：将 AST 转化为渲染函数，渲染函数是一个纯 JavaScript 函数，用于将模板转化为 Virtual DOM。
+
+------
+

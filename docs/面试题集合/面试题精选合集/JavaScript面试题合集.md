@@ -60,7 +60,7 @@ console.log({} instanceof Object);                   // true
 
 **缺点：Number，Boolean，String基本数据类型不能判断**
 
-### 3. constructor
+#### 3. constructor
 
 ```js
 let a = 1
@@ -183,8 +183,48 @@ true == '1' //true
 
 ------
 
-### ⭐️【腾讯】怎么判断质数？
+### ⭐️【小米】怎么判断质数？
 
 1. 判断是否为number类型，是否是整数，是否小于2，满足其一返回false
 2. === 2时，返回true
 3. 对n开算数平方根，此时算数平方根处于3-9，for循环遍历，如果n%i==0返回false，都不是就返回true
+
+------
+
+### 谈谈oop的理解
+
+js是面向对象语言，一切即可对象，很重要的一点，在实际编程中，可以只关注功能，不关注内部细节的编程思想，就是面向对象。抽象，封装，继承等特性。
+
+------
+
+### 了解哪些排序算法？并说一下快排原理
+
+冒泡，快排，插入，选择，桶排，堆排……
+
+![排序算法](assert/排序算法.png)
+
+#### 快排原理：
+
+1. 选择一个元素作为基准点
+2. 排序数组，比基准小的放在左边，比基准大的，放在右边。分割结束后，基准插入到中间去。
+3. 递归，将放在左边和右边的数组进行1和2的操作
+
+```js
+var quickSort = function (arr){
+  if(arr.length <= 1){
+    return arr
+  }
+  let pivotIndex = Math.floor(arr.length / 2)
+  let pivot = arr.splice(pivotIndex,1)[0]
+  let left = [] , right = []
+  for(let i = 0; i<arr.length; i++){
+    if(arr[i] < pivot){
+      left.push(arr[i])
+    }else{
+      right.push(arr[i])
+    }
+  }
+  return quickSort(left).concat(pivot,quickSort(right))
+}
+```
+
