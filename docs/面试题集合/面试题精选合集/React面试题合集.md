@@ -76,6 +76,27 @@
 >
 > useLayoutEffect【同步阻塞】在DOM变更后浏览器执行绘制前执行
 
+```js
+语法和说明: 
+        React.useEffect(() => { 
+          // 在此可以执行任何带副作用操作
+          return () => { // 在组件卸载前执行,相当于componentWillUnmount
+          // 在此做一些收尾工作, 比如清除定时器/取消订阅等
+          }
+        }, [stateValue]) 
+        // 如果什么都不写就是监视所有人，相当于componentDidMount+componentDidUpdate
+        // 如果指定的是[], 回调函数只会在第一次render()后执行，相当于componentDidMount
+        // [xxx] 当xxx更新时执行
+    
+可以把 useEffect Hook 看做如下三个函数的组合
+        componentDidMount()
+        componentDidUpdate()
+    	componentWillUnmount() 
+牛客题：若想在DOM变更后浏览器执行绘制前执行，可以使用useLayoutEffect【同步阻塞】
+```
+
+
+
 ##### 2.6 useMemo/useCallback
 
 > useMemo 用来缓存一个值，只有在依赖发生变化时才去重新计算这个值

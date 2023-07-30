@@ -2,11 +2,11 @@
 
 <!-- docs/_sidebar.md -->
 
-* -**专栏介绍**
+* **专栏介绍**
 
   ------
 
-- -**JavaScript HOT 100 题**
+- **JavaScript HOT 100 题**
 
 - [手写--防抖与节流](面试题集合/Js手写题系列/防抖与节流.md)
 
@@ -20,17 +20,19 @@
 
 - [手写--new](面试题集合/Js手写题系列/手写new.md)
 
-  ------
-
-  
-
-- **-Promise及周边（hot）**
+- [手写--bind/apply/call](面试题集合/Js手写题系列/手写bind/apply/call.md)
 
   ------
 
   
 
-- **- JavaScript 原生方法实现**
+- **Promise及周边（hot）**
+
+  ------
+
+  
+
+- **JavaScript 原生方法实现**
 
   
 
