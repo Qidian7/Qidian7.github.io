@@ -143,6 +143,37 @@ sass/less的优点：
 
 ------
 
+### - box-sizing属性
+
+box-sizing 规定两个并排的带边框的框，语法为 box-sizing：content-box/border-box/inherit
+
+**content-box**：宽度和高度分别应用到元素的内容框，在宽度和高度之外绘制元素的内边距和边框。【标准盒子模型】
+
+**border-box**：为元素设定的宽度和高度决定了元素的边框盒。【IE 盒子模型】
+
+**inherit**：继承父元素的 box-sizing 值。
+
+------
+
+### - CSS 盒子模型
+
+CSS 盒模型本质上是一个盒子，它包括：边距，边框，填充和实际内容。CSS 中的盒子模型包括 IE 盒子模型和标准的 W3C 盒子模型。\
+在标准的盒子模型中，`width 指 content 部分的宽度`。
+在 IE 盒子模型中，`width 表示 content+padding+border 这三个部分的宽度`。
+
+- 内容（content）：元素的实际内容，由 width 和 height 属性决定。
+- 内边距（padding）：内容和边框之间的空间，由 padding 属性决定。
+- 边框（border）：内容和外边距之间的边框，由 border 属性决定。
+- 外边距（margin）：盒子边缘和其它元素之间的空间，由 margin 属性决定。
+
+故在计算盒子的宽度时存在差异：
+
+**标准盒模型：** 一个块的总宽度 = width+margin(左右)+padding(左右)+border(左右)
+
+**怪异盒模型：** 一个块的总宽度 = width+margin（左右）（既 width 已经包含了 padding 和 border 值）
+
+------
+
 ### ⭐️-BFC
 
 #### 概念：
