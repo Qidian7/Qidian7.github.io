@@ -155,7 +155,7 @@ console.log(toString.call(null)); //[object Null]
 
 #### 延伸问题：async/await
 
-promise搭配async/await可以讲promise链式调用变为类似同步代码的形式。async/await必须在函数中使用，在函数钱加上async，await关键字后面是一个promise对象，并且返回该对象的值，看起来代码结构更加清晰。
+promise搭配async/await可以将promise链式调用变为类似同步代码的形式。async/await必须在函数中使用，在函数钱加上async，await关键字后面是一个promise对象，并且返回该对象的值，看起来代码结构更加清晰。
 
 ------
 
@@ -576,4 +576,11 @@ JavaScript 的事件流是指浏览器中所有事件的传递和处理过程。
 
 总体来说，W3C 标准事件模型是当前主流的事件流模型。对于事件流，我们需要了解事件捕获、目标阶段和事件冒泡，以便于正确地使用事件处理程序。
 
-### 
+------
+
+### JS 模块化方案的理解，比如 CommonJS、AMD、CMD、ES Module 分别是什么？
+
+1. CommonJS：用于服务器端的模块化方案，用于node.js中，通过require引入，通过exports或者module.exports导出
+2. AMD:一种用于浏览器端的异步加载模块的规范，用于requirejs，通过define定义模块，通过require来加载异步模块
+3. CMD:一种用于浏览器端延迟执行的模块化规范，主要用于seajs，通过define定义模块，通过require来延迟执行模块
+4. ES Module：是官方模块放方案，用于服务器端和浏览器端，通过import引入，通过export导出
