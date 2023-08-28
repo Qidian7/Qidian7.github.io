@@ -584,3 +584,69 @@ JavaScript 的事件流是指浏览器中所有事件的传递和处理过程。
 2. AMD:一种用于浏览器端的异步加载模块的规范，用于requirejs，通过define定义模块，通过require来加载异步模块
 3. CMD:一种用于浏览器端延迟执行的模块化规范，主要用于seajs，通过define定义模块，通过require来延迟执行模块
 4. ES Module：是官方模块放方案，用于服务器端和浏览器端，通过import引入，通过export导出
+
+------
+
+### 如何判断一个对象是空
+
+#### 一.不严谨的方法
+
+```js
+let obj = {}
+
+function isEmpty1(o){
+    return JSON.stringify(obj) === '{}'
+}
+
+function isEmpty2(o) {
+    return Object.keys(o).length === 0
+}
+
+function isEmpty3(o) {
+    return Object.get(o).length === 0
+}
+
+function isEmpty4(o){
+    let flag = true
+    for (let key of o){
+        if(key){
+            flag = false
+            break
+        }
+    }
+    return flag
+}
+// 此时都是true，但有一种特殊情况
+let key = Symbol('a')
+let obj1 = {
+    [key]:1
+}
+// 此时在用上述方法就会出现错误，无法判断
+```
+
+#### 二.严谨的方法
+
+```js
+let key = Symbol('a')
+let obj1 = {
+    [key]:1
+}
+
+function isEmpty5(o) {
+    return Reflect.ownKeys(o).length === 0
+}
+```
+
+#### 三.知识补充
+
+```js
+1. Object.keys() 返回一个表示给定对象的所有可枚举属性的字符串数组
+let person = {name:"张三",age:25,address:"深圳",getName:function(){}}
+Object.keys(person) // ["name", "age", "address","getName"]
+////
+let arr = [1,2,3,4,5,6]
+Object.keys(arr) // ["0", "1", "2", "3", "4", "5"]
+
+2. Object.values() 返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（ enumerable ）属性的键值。
+```
+

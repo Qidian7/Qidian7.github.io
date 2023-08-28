@@ -74,3 +74,18 @@ Node.js事件循环机制是Node.js异步非阻塞I/O的核心。事件循环允
 2. 执行输入的脚本，可能会注册各种事件（如I/O操作、定时器等）。
 3. 事件循环开始运行，进入不同的阶段（Phases），如Timers、I/O callbacks、Idle/Prepare、Poll、Check和Close callbacks。每个阶段负责处理特定类型的事件。
 4. 当事件队列中的事件被处理完毕，事件循环会检查是否还有待处理的事件或回调。如果没有，事件循环结束，程序退出；否则，事件循环继续运行，处理新的事件。
+
+------
+
+### Node.js 有哪些全局对象？它们分别有什么作用？
+
+Node.js 中有一些全局对象，它们可以在任何模块中直接访问，无需进行导入。以下是一些常见的全局对象及其作用：
+
+1. `global`：它是 Node.js 的全局命名空间，类似于浏览器环境中的 `window` 对象。在 `global` 对象上定义的属性和方法可以在任何地方访问。然而，在实际开发中，应避免在 `global` 对象上添加属性，以防止全局命名空间污染。
+2. `process`：它是一个全局对象，提供了关于当前 Node.js 进程的信息和对其进行控制的方法。`process` 对象包含诸如环境变量、命令行参数、内存使用情况、当前工作目录等属性和方法。
+3. `console`：它是一个全局对象，提供了用于输出信息和调试的方法，如 `console.log()`、`console.error()`、`console.warn()` 等。
+4. `setTimeout` 和 `clearTimeout`：这两个方法用于设置和清除定时器。`setTimeout` 方法用于在指定的毫秒数后执行一个回调函数，`clearTimeout` 方法用于取消一个先前通过 `setTimeout` 设置的定时器。
+5. `setInterval` 和 `clearInterval`：这两个方法用于设置和清除周期性定时器。`setInterval` 方法用于每隔指定的毫秒数执行一个回调函数，`clearInterval` 方法用于取消一个先前通过 `setInterval` 设置的定时器。
+6. `setImmediate` 和 `clearImmediate`：这两个方法用于在当前事件循环结束时执行一个回调函数。`setImmediate` 方法会将回调函数添加到事件循环的队列末尾，以便在当前事件循环的所有 I/O 事件和定时器事件处理完毕后执行。`clearImmediate` 方法用于取消一个先前通过 `setImmediate` 设置的回调函数。
+7. `Buffer`：它是一个全局的构造函数，用于处理二进制数据，如文件 I/O、网络 I/O 等。`Buffer` 提供了一系列方法来创建和操作字节缓冲区。
+8. `require` 和 `module`：`require` 是一个全局函数，用于导入其他模块。`module` 是一个全局对象，表示当前模块。每个 Node.js 文件都是一个模块，模块可以导出函数、对象或值，以便其他模块使用。
