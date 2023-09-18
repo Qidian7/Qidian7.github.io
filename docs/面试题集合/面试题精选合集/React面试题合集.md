@@ -95,13 +95,15 @@
 牛客题：若想在DOM变更后浏览器执行绘制前执行，可以使用useLayoutEffect【同步阻塞】
 ```
 
-
-
 ##### 2.6 useMemo/useCallback
 
 > useMemo 用来缓存一个值，只有在依赖发生变化时才去重新计算这个值
 >
 > useCallback 用来缓存一个函数，只有在依赖发生变化时才去重新更新函数
+
+###### 2.6.1 为什么要用到useMemo
+
+在React中，useMemo是一个用于性能优化的Hook函数。它的作用是缓存计算结果，只有当依赖数组中的变量发生变化时，useMemo才会重新计算缓存值。当组件重新渲染时，如果依赖数组中的变量没有发生变化，useMemo会直接返回之前缓存的值，避免在每次渲染时都重新计算，从而提高组件的渲染性能。
 
 ##### 2.7 useId
 
@@ -109,9 +111,9 @@
 
 在CSR中id是稳定的，没有什么问题
 
-在SSR中，会先在服务器随机生成一个id，然后以html的形式传给客户端，客户端在hydration的阶段再次生成随机id，就会导致服务器端和客户端id不一致
+在SSR中，会先在服务器随机生成一个id，然后以html的形式传给客户端，客户端在hydration的阶段再次生成随机id，就会导致服务器端和客户端id不一致。
 
-`const id = useId()`并且要注意，useId生成的id是带冒号的
+`const id = useId()`并且要注意，useId生成的id是带冒号的。
 
 ##### 2.8 useTransition
 
@@ -122,6 +124,48 @@
 在 React 中，每个组件都有自己的状态和生命周期。Hooks 的作用就是帮助我们管理组件的状态和生命周期，需要保证在每次组件渲染时，Hooks 的执行顺序都是一致的。
 
 如果将 Hooks 写在循环或条件语句中，那么每次渲染时，Hooks 的执行顺序都可能会发生变化。这样会导致组件状态发生不可预测的变化，从而影响组件的正确性。
+
+------
+
+### 说一下 react-fiber
+
+#### 1）背景
+
+react-fiber 产生的根本原因，是`大量的同步计算任务阻塞了浏览器的 UI 渲染`。默认情况下，JS 运算、页面布局和页面绘制都是运行在浏览器的主线程当中，他们之间是互斥的关系。如果 JS 运算持续占用主线程，页面就没法得到及时的更新。当我们调用`setState`更新页面的时候，React 会遍历应用的所有节点，计算出差异，然后再更新 UI。如果页面元素很多，整个过程占用的时机就可能超过 16 毫秒，就容易出现掉帧的现象。
+
+#### 2）实现原理
+
+- react内部运转分三层：
+  - Virtual DOM 层，描述页面长什么样。
+  - Reconciler 层，负责调用组件生命周期方法，进行 Diff 运算等。
+  - Renderer 层，根据不同的平台，渲染出相应的页面，比较常见的是 ReactDOM 和 ReactNative。
+
+`Fiber 其实指的是一种数据结构，它可以用一个纯 JS 对象来表示`：
+
+```
+const fiber = {
+    stateNode,    // 节点实例
+    child,        // 子节点
+    sibling,      // 兄弟节点
+    return,       // 父节点
+}
+```
+
+- 为了实现不卡顿，就需要有一个调度器 (Scheduler) 来进行任务分配。优先级高的任务（如键盘输入）可以打断优先级低的任务（如Diff）的执行，从而更快的生效。任务的优先级有六种：
+  - synchronous，与之前的Stack Reconciler操作一样，同步执行
+  - task，在next tick之前执行
+  - animation，下一帧之前执行
+  - high，在不久的将来立即执行
+  - low，稍微延迟执行也没关系
+  - offscreen，下一次render时或scroll时才执行
+- Fiber Reconciler（react ）执行过程分为2个阶段：
+  - 阶段一，生成 Fiber 树，得出需要更新的节点信息。这一步是一个渐进的过程，可以被打断。阶段一可被打断的特性，让优先级更高的任务先执行，从框架层面大大降低了页面掉帧的概率。
+  - 阶段二，将需要更新的节点一次过批量更新，这个过程不能被打断。
+- Fiber树：React 在 render 第一次渲染时，会通过 React.createElement 创建一颗 Element 树，可以称之为 Virtual DOM Tree，由于要记录上下文信息，加入了 Fiber，每一个 Element 会对应一个 Fiber Node，将 Fiber Node 链接起来的结构成为 Fiber Tree。Fiber Tree 一个重要的特点是链表结构，将递归遍历编程循环遍历，然后配合 requestIdleCallback API, 实现任务拆分、中断与恢复。
+
+从Stack Reconciler到Fiber Reconciler，源码层面其实就是干了一件递归改循环的事情
+
+传送门 ☞[# 深入了解 Fiber](https://juejin.cn/post/7002250258826657799)
 
 ------
 

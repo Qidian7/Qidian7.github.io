@@ -196,7 +196,7 @@ position:absolute / fixed
 
 ------
 
-### ⭐️-常见的布局单位
+### ⭐️- 常见的布局单位
 
 像素px，百分比%，em（文字相对长度），rem，vw（视窗宽度）/vh（视窗高度），vmin，vmax
 
